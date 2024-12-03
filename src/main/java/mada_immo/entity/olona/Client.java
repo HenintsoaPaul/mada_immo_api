@@ -10,8 +10,8 @@ import lombok.NoArgsConstructor;
 public class Client {
     @Id
     @GeneratedValue( strategy = GenerationType.IDENTITY )
-    @Column( name = "id_proprio" )
-    private Long idProprio;
+    @Column( name = "id_client" )
+    private Long idClient;
 
     private String nom;
 
