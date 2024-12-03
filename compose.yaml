@@ -1,0 +1,9 @@
+services:
+  postgres:
+    image: 'postgres:15'
+    environment:
+      - 'POSTGRES_DB=mada_immo'
+      - 'POSTGRES_PASSWORD=itu16'
+      - 'POSTGRES_USER=postgres'
+    ports:
+      - '5432'
