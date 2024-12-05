@@ -3,8 +3,6 @@ package mada_immo.entity;
 import jakarta.persistence.*;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import mada_immo.entity.olona.Client;
-import mada_immo.entity.trano.Bien;
 
 import java.time.LocalDate;
 
@@ -21,10 +19,29 @@ public class LocationFille {
     @Column( name = "date_location" )
     private LocalDate dateLocation;
 
-    @Column( name = "montant_loyer" )
-    private double montantLoyer;
-
     @ManyToOne( fetch = FetchType.LAZY )
     @JoinColumn( name = "id_location_mere" )
     private Location location_mere;
+
+    /**
+     * @return le pourcentage de commission
+     */
+    public double getCommission() {
+        return this.getLocation_mere().getBien().getTypeBien().getCommission();
+    }
+
+    /**
+     * @return le commission apres calcul depuis le loyerMensuel
+     */
+    public double getCommissionDeductible() {
+        return this.getLoyer() * this.getCommission();
+    }
+
+    public double getLoyer() {
+        return this.getLocation_mere().getBien().getLoyerMensuel();
+    }
+
+    public double getLoyerApresDeductionCommission() {
+        return this.getLoyer() - this.getCommissionDeductible();
+    }
 }
