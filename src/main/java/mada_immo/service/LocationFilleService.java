@@ -1,7 +1,6 @@
 package mada_immo.service;
 
 import lombok.RequiredArgsConstructor;
-import mada_immo.dto.money.GainMensuel;
 import mada_immo.dto.money.TurnoverAdminResponse;
 import mada_immo.dto.money.TurnoverProprioResponse;
 import mada_immo.entity.LocationFille;
@@ -38,11 +37,5 @@ public class LocationFilleService {
                 d2 = dateService.getLastDayOfMonth( dateFin );
         LocationFille[] locations = locationFilleRepository.findAllInIntvl( d1, d2 );
         return new TurnoverAdminResponse( locations );
-    }
-
-    public GainMensuel[] findGainMensuelAdminInIntvl( LocalDate dateDebut, LocalDate dateFin ) {
-        LocalDate d1 = dateService.getFirstDayOfMonth( dateDebut ),
-                d2 = dateService.getLastDayOfMonth( dateFin );
-        return locationFilleRepository.findGainInIntvl( d1, d2 );
     }
 }

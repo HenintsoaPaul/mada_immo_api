@@ -1,9 +1,7 @@
 package mada_immo.dto.money;
 
-import lombok.Data;
+public interface GainMensuel {
+    String getMonth_year();
 
-@Data
-public class GainMensuel {
-    private String month_year;
-    private double gain;
+    double getGain();
 }

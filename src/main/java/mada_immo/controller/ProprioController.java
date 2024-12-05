@@ -5,16 +5,14 @@ import mada_immo.dto.money.TurnoverProprioResponse;
 import mada_immo.entity.trano.Bien;
 import mada_immo.repository.BienRepository;
 import mada_immo.service.LocationFilleService;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDate;
 import java.util.List;
 
 @RequiredArgsConstructor
-@RestController( "/proprios" )
+@RestController
+@RequestMapping( "/proprios" )
 public class ProprioController {
     private final BienRepository bienRepository;
     private final LocationFilleService locationFilleService;
