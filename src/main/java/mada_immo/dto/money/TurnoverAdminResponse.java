@@ -4,19 +4,16 @@ import lombok.Data;
 import mada_immo.entity.LocationFille;
 
 @Data
-public class TurnoverProprioResponse extends TurnoverResponse {
-    private Long idProprio;
-
+public class TurnoverAdminResponse extends TurnoverResponse {
     void setMontant() {
         double montant = 0;
         for ( LocationFille location : super.getLocationFilles() ) {
-            montant += location.getLoyerApresDeductionCommission();
+            montant += location.getCommissionDeductible();
         }
         this.setMontant( montant );
     }
 
-    public TurnoverProprioResponse( Long idProprio, LocationFille[] locationFilles ) {
-        this.setIdProprio( idProprio );
+    public TurnoverAdminResponse( LocationFille[] locationFilles ) {
         super.setLocationFilles( locationFilles );
     }
 }
