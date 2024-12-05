@@ -20,14 +20,14 @@ public class LocationFille {
     private LocalDate dateLocation;
 
     @ManyToOne( fetch = FetchType.LAZY )
-    @JoinColumn( name = "id_location_mere" )
-    private Location location_mere;
+    @JoinColumn( name = "id_location_mere", referencedColumnName = "id_location" )
+    private Location locationMere;
 
     /**
      * @return le pourcentage de commission
      */
     public double getCommission() {
-        return this.getLocation_mere().getBien().getTypeBien().getCommission();
+        return this.getLocationMere().getBien().getTypeBien().getCommission();
     }
 
     /**
@@ -38,7 +38,7 @@ public class LocationFille {
     }
 
     public double getLoyer() {
-        return this.getLocation_mere().getBien().getLoyerMensuel();
+        return this.getLocationMere().getBien().getLoyerMensuel();
     }
 
     public double getLoyerApresDeductionCommission() {

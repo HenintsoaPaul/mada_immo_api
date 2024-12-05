@@ -1,9 +1,11 @@
 package mada_immo.dto.money;
 
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 import mada_immo.entity.LocationFille;
 
 @Data
+@EqualsAndHashCode( callSuper = true )
 public class TurnoverProprioResponse extends TurnoverResponse {
     private Long idProprio;
 
