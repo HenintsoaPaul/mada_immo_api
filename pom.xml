@@ -10,7 +10,7 @@
     </parent>
     <groupId>mg.mada.immo</groupId>
     <artifactId>mada_immo</artifactId>
-    <version>0.0.1-SNAPSHOT</version>
+    <version>unos</version>
     <name>mada_immo_api</name>
     <description>mada_immo_api</description>
     <url/>

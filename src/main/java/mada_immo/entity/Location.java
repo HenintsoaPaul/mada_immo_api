@@ -5,7 +5,6 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import mada_immo.entity.olona.Client;
 import mada_immo.entity.trano.Bien;
-import mada_immo.entity.trano.TypeBien;
 
 import java.time.LocalDate;
 
