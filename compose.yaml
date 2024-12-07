@@ -1,21 +1,5 @@
 version: '3.8'
 services:
-  app:
-    container_name: mada_immo-app
-    build:
-      context: .
-      dockerfile: Dockerfile
-    environment:
-      DB_HOST: postgres
-      DB_PORT: 5432
-      DB_NAME: mada_immo
-      DB_USERNAME: postgres
-      DB_PASSWORD: itu16
-    ports:
-      - "911:911"
-    depends_on:
-      - db
-
   db:
     image: postgres:15
     container_name: postgres-container
@@ -24,9 +8,32 @@ services:
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: itu16
     ports:
-      - "5432:5432"
+      - "912:5432"
     volumes:
       - postgres_data:/var/lib/postgresql/data
+      - ./src/main/resources/db/init.sql:/docker-entrypoint-initdb.d/init.sql
+    healthcheck:
+      test: [ "CMD-SHELL", "pg_isready -U postgres -d mada_immo" ]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  app:
+    container_name: mada_immo-container
+    build:
+      context: .
+      dockerfile: Dockerfile
+    environment:
+      DB_URL: postgres-container
+      DB_PORT: 5432
+      DB_NAME: mada_immo
+      DB_USERNAME: postgres
+      DB_PASSWORD: itu16
+    ports:
+      - "911:911"
+    depends_on:
+      db:
+          condition: service_healthy
 
 volumes:
   postgres_data:
