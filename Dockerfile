@@ -1,14 +1,13 @@
-# Use a base image with JDK
-FROM openjdk:17-jdk-slim
-
-# Set working directory inside container
+# Stage 1: Build the application
+FROM openjdk:17-jdk-slim as builder
 WORKDIR /app
+COPY pom.xml .
+COPY src ./src
+RUN mvn clean package -DskipTests
 
-# Copy the Spring Boot jar file
-COPY target/mada_immo-unos.jar app.jar
-
-# Expose the port the application will run on
-EXPOSE 911
-
-# Command to run the application
+# Stage 2: Run the application
+FROM openjdk:17-jdk-slim
+WORKDIR /app
+COPY --from=builder /app/target/mada_immo-unos.jar app.jar
 ENTRYPOINT ["java", "-jar", "app.jar"]
+
