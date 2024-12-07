@@ -1,9 +1,32 @@
+version: '3.8'
 services:
-  postgres:
-    image: 'postgres:15'
+  app:
+    container_name: mada_immo-app
+    build:
+      context: .
+      dockerfile: Dockerfile
     environment:
-      - 'POSTGRES_DB=mada_immo'
-      - 'POSTGRES_PASSWORD=itu16'
-      - 'POSTGRES_USER=postgres'
+      DB_HOST: postgres
+      DB_PORT: 5432
+      DB_NAME: mada_immo
+      DB_USERNAME: postgres
+      DB_PASSWORD: itu16
     ports:
-      - '5432'
+      - "911:911"
+    depends_on:
+      - db
+
+  db:
+    image: postgres:15
+    container_name: postgres-container
+    environment:
+      POSTGRES_DB: mada_immo
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: itu16
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+
+volumes:
+  postgres_data:
