@@ -1,5 +1,6 @@
 package mada_immo.entity.trano;
 
+import com.fasterxml.jackson.annotation.JsonView;
 import jakarta.persistence.*;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -13,8 +14,10 @@ public class Bien {
     @Id
     @GeneratedValue( strategy = GenerationType.IDENTITY )
     @Column( name = "id_bien" )
+    @JsonView( BienViews.Basic.class )
     private Long idBien;
 
+    @JsonView( BienViews.Basic.class )
     private String nom;
 
     private String description;
@@ -30,6 +33,7 @@ public class Bien {
 
     @ManyToOne( fetch = FetchType.LAZY )
     @JoinColumn( name = "id_proprio" )
+    @JsonView( BienViews.Basic.class )
     private Proprio proprio;
 
     @ManyToOne( fetch = FetchType.LAZY )

@@ -1,8 +1,10 @@
 package mada_immo.controller;
 
+import com.fasterxml.jackson.annotation.JsonView;
 import lombok.RequiredArgsConstructor;
 import mada_immo.dto.money.TurnoverProprioResponse;
 import mada_immo.entity.trano.Bien;
+import mada_immo.entity.trano.BienViews;
 import mada_immo.repository.BienRepository;
 import mada_immo.service.LocationFilleService;
 import org.springframework.web.bind.annotation.*;
@@ -18,6 +20,7 @@ public class ProprioController {
     private final LocationFilleService locationFilleService;
 
     @GetMapping( "/{idProprio}/biens" )
+    @JsonView( BienViews.Basic.class )
     public List<Bien> findAllByIdProprio( @PathVariable Long idProprio ) {
         return bienRepository.findAllByIdProprio( idProprio );
     }
